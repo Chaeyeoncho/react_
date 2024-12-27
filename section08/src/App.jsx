@@ -14,20 +14,20 @@ const modckData =[
   {
     id: 2,
     isDone: false,
-    content: "React 공부하기",
+    content: "빨래하기",
     data : new Date().getTime(),
   },
   {
     id: 3,
     isDone: false,
-    content: "React 공부하기",
+    content: "저녁 만들기",
     data : new Date().getTime(),
   },
 ]
 
 function App() {
 
-  const [todos, setTodos] = useState([modckData]);
+  const [todos, setTodos] = useState(modckData);
   const idRef = useRef(4);
 
   const onCreate =(content) => {
@@ -40,12 +40,23 @@ function App() {
     setTodos([newTodo,...todos])
   }
 
-   
+  const onUpdate =(targetId)=>{
+    setTodos(
+      todos.map((todo) =>
+        todo.id === targetId ? {...todo, isDone: !todo.isDone} : todo
+      )
+    )
+  }   
+
+  const onDelete =(targetId)=>{
+    setTodos(todos.filter((todo) => todo.id !== targetId))
+  }
+
   return (
     <div className = "App">
       <Header />
       <Editor onCreate = {onCreate}/>
-      <List todos ={todos}/>
+      <List todos ={todos} onUpdate = {onUpdate} onDelete = {onDelete}/>
     </div>
   )
 }
