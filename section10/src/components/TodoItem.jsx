@@ -21,11 +21,4 @@ function TodoItem({id, isDone, content, date , onUpdate, onDelete}) {
     )
 }
 
-export default memo(TodoItem , (prevProps, nextProps)=>{
-    if(prevProps.id !== nextProps.id) return false
-    if(prevProps.isDone !== nextProps.isDone) return false
-    if(prevProps.content !== nextProps.content) return false 
-    if(prevProps.date !== nextProps.date) return false // false는 리렌더링
-
-    return true; // 리렌더링 하지 않음
-});
+export default memo(TodoItem); 
